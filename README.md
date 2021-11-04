@@ -16,6 +16,10 @@
 
 Теперь rest-api будет доступен через 1234 порт. 
 
+
+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
+
+
 ## Запросы 
 
 Отправлять картинки можно через POST запрос на your_host_ip:1234/upload
