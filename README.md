@@ -2,7 +2,6 @@
 
 Для установки понадобится установленный docker и docker-compose
 
-> pip install docker 
-> pip install docker-compose
+> apt install docker.io
 
 Далее клонируем репозиторий
