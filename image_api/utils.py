@@ -18,8 +18,8 @@ def scale_image(image, scale=1):
 
 
 def get_diff(upload_image, exists_image):
-    if abs((upload_image.image.height/upload_image.image.width) - (exists_image.image.height/exists_image.image.width)) >= 0.01:
-        return 1
+    if abs((upload_image.image.height/upload_image.image.width) - (exists_image.image.height/exists_image.image.width)) >= 0.0001:
+        return 10
 
     upload = Image.open(upload_image.image)
     exists = Image.open(exists_image.image.url[1:])
@@ -33,7 +33,7 @@ def get_diff(upload_image, exists_image):
     black = 0
     other = 0
     for pixel in diff.getdata():
-        if pixel[0] < 10 and pixel[1] < 10 and pixel[2] < 10:
+        if pixel[0] < 12 and pixel[1] < 12 and pixel[2] < 12:
             black += 1
         else:
             other += 1

@@ -56,9 +56,10 @@ class ImageUpload(viewsets.ModelViewSet):
             id = None
             queryset = Image.objects.all()
             for exist_image in queryset:
-                if utils.get_diff(image, exist_image) < 0.14:
+                if utils.get_diff(image, exist_image) < 0.1+0.02*(max(image.image.height, exist_image.image.height)/min(image.image.height, exist_image.image.height)):
                     if image.image.height > exist_image.image.height:
                         exist_image.image = image.image
+                        exist_image.image.name = str(random.randint(1000000, 99999999999))+'.jpg'
                         exist_image.save()
                     id = exist_image.id
                     break
