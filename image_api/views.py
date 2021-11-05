@@ -21,8 +21,8 @@ class ImageViewSet(viewsets.ModelViewSet):
             if request.query_params.get('scale', None) is not None:
                 try:
                     scale = float(request.query_params['scale'])
-                    if image.image.width*scale < 1 or image.image.width*scale > 20000 or \
-                    image.image.height*scale < 1 or image.image.height*scale > 20000:
+                    if image.image.width*scale < 1 or image.image.width*scale > 10000 or \
+                    image.image.height*scale < 1 or image.image.height*scale > 10000:
                         raise ValueError('') 
                 except ValueError as e:
                     return Response({'details': "scale parametr is not float or scaled image is out of size borders"}, status=404)
