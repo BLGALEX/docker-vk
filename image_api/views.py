@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .serializers import ImageSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.parsers import FormParser, MultiPartParser
+import random
 
 
 class ImageViewSet(viewsets.ModelViewSet):
@@ -25,7 +26,8 @@ class ImageViewSet(viewsets.ModelViewSet):
                         raise ValueError('') 
                 except ValueError as e:
                     return Response({'details': "scale parametr is not float or scaled image is out of size borders"}, status=404)
-            return Response({'image': "{}".format(request.build_absolute_uri(utils.scale_image(image, scale)))})
+                return Response({'image': "{}".format(request.build_absolute_uri(utils.scale_image(image, scale)))})
+            return Response({'image': "{}".format(request.build_absolute_uri(image.image.url))})
         else:
             queryset = Image.objects.all()
             resp = []
@@ -47,10 +49,25 @@ class ImageUpload(viewsets.ModelViewSet):
     http_method_names = ['post']
 
     def create(self, request, *args, **kwargs):
+        print(request.data['image'])
         serializer = ImageSerializer(data=request.data)
         if serializer.is_valid():
-            image = serializer.save()
-            return Response({'id': image.id}, status=200)
+            image = Image(image=request.data['image'])
+            id = None
+            queryset = Image.objects.all()
+            for exist_image in queryset:
+                if utils.get_diff(image, exist_image) < 0.14:
+                    if image.image.height > exist_image.image.height:
+                        exist_image.image = image.image
+                        exist_image.save()
+                    id = exist_image.id
+                    break
+            else:
+                print(image.image.name)
+                image.image.name = str(random.randint(1000000, 99999999999))+'.jpg'
+                image.save()
+                id = image.id
+            return Response({'id': id}, status=200)
         else:
             return Response(status=404)
        
