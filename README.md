@@ -6,7 +6,7 @@
 
 Далее клонируем репозиторий в нужную папку
 
-> git clone https://github.com/BLGALEX/docker-vk.git
+> git clone https://<your_github_username>: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@github.com/BLGALEX/docker-vk.git
 
 Переходим в папку скопированного репозитория и запускаем docker-compose
 (Для запуска сервиса необходимо >400 Mb RAM)
@@ -15,10 +15,6 @@
 > docker-compose up
 
 Теперь rest-api будет доступен через 1234 порт. 
-
-
-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
-
 
 ## Запросы 
 
