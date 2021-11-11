@@ -8,7 +8,7 @@
 ```
 Либо выполнить следующие команды:
 ```shell
-> git clone https://<your_github_username>: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@github.com/BLGALEX/docker-vk.git
+> git clone https://github.com/BLGALEX/docker-vk.git
 > cd docker-vk
 > python3 script.py 
 ```
@@ -25,7 +25,7 @@
 Для того чтобы развернуть ваш собственный проект с помощью docker необходимо выполнить следующие комнады на linux машине (Для запуска сервиса необходимо >400 Mb RAM):
 ```shell
 > sudo apt install docker.io
-> git clone https://<your_github_username>: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@github.com/BLGALEX/docker-vk.git
+> git clone https://github.com/BLGALEX/docker-vk.git
 > cd docker-vk
 > docker-compose up
 ```
